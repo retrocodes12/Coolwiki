@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>CoolWiki</title>
+ <link rel="icon" type="image/png" href="fevicon.png">
+   <meta name="theme-color" content="#fcfcfc">
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <!-- Google Fonts: Roboto for UI, Source Serif 4 for Reading -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap"
+        rel="stylesheet">
+    <!-- Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"
+        integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71bZBTIQHQ" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"
+        integrity="sha384-cpW21h6RZv/phavutF+GqIGOmtFQA04s0i1Ait2x9f/rK9pdxDszuA6i/n2bS/m8"
+        crossorigin="anonymous"></script>
+
+    <style>
+        /* MATERIAL 3 DESIGN TOKENS */
+        :root {
+            /* Light Mode Colors (Base) */
+            --md-sys-color-primary: #006874;
+            --md-sys-color-on-primary: #ffffff;
+            --md-sys-color-primary-container: #97f0ff;
+            --md-sys-color-on-primary-container: #001f24;
+            --md-sys-color-secondary-container: #cce8e8;
+            --md-sys-color-on-secondary-container: #051f1f;
+            --md-sys-color-background: #fcfcfc;
+            --md-sys-color-on-background: #191c1c;
+            --md-sys-color-surface: #fcfcfc;
+            --md-sys-color-surface-container: #f1f4f4;
+            --md-sys-color-surface-container-high: #ecefee;
+            --md-sys-color-on-surface: #191c1c;
+            --md-sys-color-on-surface-variant: #3f484a;
+            --md-sys-color-outline: #6f797a;
+            --md-sys-color-surface-tint: #006874;
+
+            --nav-height: 80px;
+            --topbar-height: 64px;
+
+            --font-ui: 'Roboto', sans-serif;
+            --font-reading: 'Source Serif 4', serif;
+            --font-size-base: 18px;
+            /* Adjustable via settings */
+
+            --elevation-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --elevation-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+            --elevation-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+
+            --transition-standard: 250ms cubic-bezier(0.2, 0, 0, 1);
+            --transition-emphasized: 500ms cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        [data-theme="dark"] {
+            --md-sys-color-primary: #4fd8eb;
+            --md-sys-color-on-primary: #00363d;
+            --md-sys-color-primary-container: #004f58;
+            --md-sys-color-on-primary-container: #97f0ff;
+            --md-sys-color-secondary-container: #334b4b;
+            --md-sys-color-on-secondary-container: #cce8e8;
+            --md-sys-color-background: #191c1c;
+            --md-sys-color-on-background: #e1e3e3;
+            --md-sys-color-surface: #191c1c;
+            --md-sys-color-surface-container: #1d2020;
+            --md-sys-color-surface-container-high: #272a2b;
+            --md-sys-color-on-surface: #e1e3e3;
+            --md-sys-color-on-surface-variant: #bfc8ca;
+            --md-sys-color-outline: #899394;
+            --md-sys-color-surface-tint: #4fd8eb;
+
+            --elevation-1: 0 1px 3px 1px rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --elevation-2: 0 2px 6px 2px rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --elevation-3: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        [data-data-saver="true"] img:not(.keep) {
+            display: none !important;
+        }
+
+        /* GLOBAL RESET & BASICS */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+            font-family: var(--font-ui);
+            background-color: var(--md-sys-color-background);
+            color: var(--md-sys-color-on-background);
+            transition: background-color var(--transition-standard), color var(--transition-standard);
+            overscroll-behavior-y: none;
+            /* Prevent pull-to-refresh blank space */
+        }
+
+        /* MATERIAL ICONS SETTINGS */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+            user-select: none;
+        }
+
+        .icon-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* APP LAYOUT */
+        #app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            height: 100dvh;
+        }
+
+        /* TOP APP BAR */
+        .top-app-bar {
+            height: var(--topbar-height);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            background: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            transition: transform var(--transition-standard), background-color var(--transition-standard);
+        }
+
+        .top-app-bar.scrolled {
+            background: var(--md-sys-color-surface-container);
+        }
+
+        .top-app-bar.hide {
+            transform: translateY(-100%);
+        }
+
+        .top-app-bar-title {
+            flex: 1;
+            font-size: 22px;
+            font-weight: 400;
+            margin-left: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .icon-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            color: var(--md-sys-color-on-surface-variant);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.2s;
+        }
+
+        .icon-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--md-sys-color-on-surface);
+            opacity: 0.1;
+            transition: transform 0.2s;
+        }
+
+        .icon-btn:active::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* MAIN CONTENT AREA */
+        main {
+            flex: 1;
+            overflow-y: auto;
+            padding-top: var(--topbar-height);
+            padding-bottom: calc(var(--nav-height) + env(safe-area-inset-bottom));
+            scroll-behavior: smooth;
+            background:
+                linear-gradient(to bottom, transparent, transparent),
+                var(--md-sys-color-background);
+        }
+
+        .view {
+            display: none;
+            animation: fade-in var(--transition-standard);
+            min-height: 100%;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* BOTTOM NAVIGATION */
+        .bottom-nav {
+            height: calc(var(--nav-height) + env(safe-area-inset-bottom));
+            background: var(--md-sys-color-surface-container);
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-top: 6px;
+            box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04);
+            /* iOS support */
+            transition: transform var(--transition-standard);
+        }
+
+        .bottom-nav.hide {
+            transform: translateY(100%);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: var(--nav-height);
+            cursor: pointer;
+            color: var(--md-sys-color-on-surface-variant);
+            text-decoration: none;
+            gap: 4px;
+        }
+
+        .nav-icon-container {
+            width: 64px;
+            height: 32px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+
+        .nav-label {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+
+        .nav-item.active .nav-icon-container {
+            background: var(--md-sys-color-secondary-container);
+        }
+
+        .nav-item.active .nav-label {
+            color: var(--md-sys-color-on-surface);
+            font-weight: 700;
+        }
+
+        .nav-item.active .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            color: var(--md-sys-color-on-secondary-container);
+        }
+
+        /* COMMON COMPONENTS */
+        .container {
+            padding: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface-variant);
+            margin: 24px 0 16px 8px;
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--md-sys-color-surface-container-high);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--md-sys-color-on-surface);
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+
+        .card:active::before {
+            opacity: 0.08;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: var(--md-sys-color-surface-variant);
+        }
+
+        .card-content {
+            padding: 16px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--md-sys-color-on-surface);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .card-desc {
+            font-size: 14px;
+            color: var(--md-sys-color-on-surface-variant);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-meta {
+            font-size: 12px;
+            color: var(--md-sys-color-on-surface-variant);
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* LIST ITEMS */
+        .list-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            gap: 16px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .list-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--md-sys-color-on-surface);
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+
+        .list-item:active::after {
+            opacity: 0.08;
+        }
+
+        .list-img {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            object-fit: cover;
+            background: var(--md-sys-color-surface-variant);
+            flex-shrink: 0;
+        }
+
+        .list-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .list-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface);
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .list-desc {
+            font-size: 14px;
+            color: var(--md-sys-color-on-surface-variant);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .list-divider {
+            height: 1px;
+            background: var(--md-sys-color-outline);
+            opacity: 0.2;
+            margin-left: 96px;
+        }
+
+        /* ARTICLE VIEW (READING EXP) */
+        .article-view {
+            padding-top: 14px;
+            padding-bottom: 20px;
+        }
+
+        #article-hero-container {
+            position: relative;
+            width: min(100%, 980px);
+            margin: 0 auto;
+        }
+
+        #article-hero-container::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 140px;
+            pointer-events: none;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--md-sys-color-background));
+        }
+
+        .article-header {
+            width: min(100% - 24px, 920px);
+            margin: 20px auto 16px;
+            padding: 24px 24px 22px;
+            background: color-mix(in srgb, var(--md-sys-color-surface-container-high) 92%, transparent);
+            border: 1px solid color-mix(in srgb, var(--md-sys-color-outline) 16%, transparent);
+            border-radius: 28px;
+            box-shadow: var(--elevation-2);
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(8px);
+        }
+
+        .article-view.has-hero .article-header {
+            margin-top: -18px;
+        }
+
+        .article-title {
+            font-family: var(--font-reading);
+            font-size: clamp(34px, 6vw, 46px);
+            font-weight: 600;
+            line-height: 1.12;
+            letter-spacing: -0.02em;
+            color: var(--md-sys-color-on-surface);
+            margin-bottom: 12px;
+        }
+
+        .article-desc {
+            font-size: 18px;
+            color: var(--md-sys-color-on-surface-variant);
+            margin-bottom: 0;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .article-hero {
+            width: 100%;
+            height: clamp(260px, 42vw, 480px);
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            background: var(--md-sys-color-surface-container-high);
+        }
+
+        .article-content {
+            font-family: var(--font-reading);
+            font-size: var(--font-size-base);
+            line-height: 1.88;
+            color: var(--md-sys-color-on-background);
+            padding: 28px 24px 36px;
+            width: min(100% - 24px, 920px);
+            margin: 0 auto;
+            background: var(--md-sys-color-surface-container-high);
+            border-radius: 28px;
+            box-shadow: var(--elevation-1);
+        }
+
+        .article-content p {
+            margin-bottom: 1.2em;
+            text-align: justify;
+            text-wrap: pretty;
+        }
+
+        .article-content h2 {
+            font-family: var(--font-reading);
+            font-size: 30px;
+            font-weight: 600;
+            line-height: 1.2;
+            margin: 40px 0 18px;
+            color: var(--md-sys-color-on-surface);
+            padding: 0 0 10px;
+            border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline) 22%, transparent);
+        }
+
+        .article-content h3 {
+            font-family: var(--font-reading);
+            font-size: 24px;
+            font-weight: 600;
+            margin: 28px 0 14px;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .article-content a {
+            color: color-mix(in srgb, var(--md-sys-color-primary) 88%, var(--md-sys-color-on-surface) 12%);
+            text-decoration: underline;
+            text-decoration-thickness: 0.08em;
+            text-underline-offset: 0.14em;
+            font-weight: 600;
+        }
+
+        .article-content a:active {
+            opacity: 0.7;
+        }
+
+        .article-content strong,
+        .article-content b {
+            color: var(--md-sys-color-on-surface);
+            font-weight: 700;
+        }
+
+        .article-content ul,
+        .article-content ol {
+            padding-left: 24px;
+            margin-bottom: 1.2em;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 18px;
+            display: block;
+            margin: 18px auto;
+            box-shadow: var(--elevation-1);
+        }
+
+        .article-content .thumbcaption {
+            font-family: var(--font-reading);
+            font-size: 15px;
+            color: var(--md-sys-color-on-surface-variant);
+            text-align: center;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        .article-content table,
+        .article-content .infobox,
+        .article-content .wikitable {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0 24px;
+            font-family: var(--font-ui);
+            font-size: 14px;
+            background: var(--md-sys-color-surface);
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: var(--elevation-1);
+        }
+
+        .article-content th,
+        .article-content td {
+            border: none;
+            border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline) 20%, transparent);
+            padding: 14px 16px;
+            vertical-align: top;
+        }
+
+        .article-content tr:last-child td,
+        .article-content tr:last-child th {
+            border-bottom: none;
+        }
+
+        .article-content th {
+            background: var(--md-sys-color-surface-container);
+            text-align: left;
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .article-content td {
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid var(--md-sys-color-primary);
+            padding: 8px 0 8px 18px;
+            margin-left: 0;
+            font-style: italic;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .article-content>table,
+        .article-content>.infobox,
+        .article-content>.wikitable {
+            display: table;
+        }
+
+        .article-content figure,
+        .article-content .thumb,
+        .article-content .gallery,
+        .article-content .hatnote,
+        .article-content .shortdescription {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+
+        .article-content .thumb,
+        .article-content .gallery,
+        .article-content .hatnote {
+            background: var(--md-sys-color-surface);
+            border-radius: 22px;
+            padding: 16px;
+            margin: 18px 0 24px !important;
+            box-shadow: var(--elevation-1);
+        }
+
+        .article-content .thumb,
+        .article-content .gallery,
+        .article-content .hatnote,
+        .article-content .infobox,
+        .article-content .wikitable,
+        .article-content figure,
+        .article-content figcaption,
+        .article-content .thumbcaption {
+            color: var(--md-sys-color-on-surface) !important;
+        }
+
+        .article-content .thumb *,
+        .article-content .gallery *,
+        .article-content .hatnote *,
+        .article-content .infobox *,
+        .article-content .wikitable * {
+            color: inherit;
+        }
+
+        .article-content .hatnote a,
+        .article-content .thumb a,
+        .article-content .gallery a,
+        .article-content .infobox a,
+        .article-content .wikitable a {
+            color: color-mix(in srgb, var(--md-sys-color-primary) 86%, var(--md-sys-color-on-surface) 14%) !important;
+        }
+
+        .article-content .force-dark-on-light,
+        .article-content .force-dark-on-light * {
+            color: #111111 !important;
+        }
+
+        .article-content .force-dark-on-light a {
+            color: #3a3a3a !important;
+        }
+
+        /* SEARCH BAR (Full Page) */
+        .search-container {
+            position: sticky;
+            top: 0;
+            background: var(--md-sys-color-surface);
+            padding: 16px;
+            z-index: 5;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: var(--md-sys-color-surface-container-high);
+            border-radius: 28px;
+            height: 56px;
+            padding: 0 16px;
+            box-shadow: var(--elevation-1);
+        }
+
+        .search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: var(--md-sys-color-on-surface);
+            margin-left: 12px;
+        }
+
+        .search-input::placeholder {
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        /* SETTINGS VIEW */
+        .pref-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background: var(--md-sys-color-surface-container);
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .pref-info-title {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .pref-info-desc {
+            font-size: 14px;
+            color: var(--md-sys-color-on-surface-variant);
+            margin-top: 4px;
+        }
+
+        .md-switch {
+            position: relative;
+            width: 52px;
+            height: 32px;
+            background: var(--md-sys-color-surface-variant);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .md-switch.on {
+            background: var(--md-sys-color-primary);
+        }
+
+        .md-switch::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 24px;
+            height: 24px;
+            background: var(--md-sys-color-surface);
+            border-radius: 50%;
+            transition: transform 0.3s;
+            box-shadow: var(--elevation-1);
+        }
+
+        .md-switch.on::after {
+            transform: translateX(20px);
+        }
+
+        .md-select {
+            background: transparent;
+            border: none;
+            color: var(--md-sys-color-primary);
+            font-size: 16px;
+            font-weight: 500;
+            outline: none;
+        }
+
+        /* FAB */
+        .fab {
+            position: fixed;
+            bottom: calc(var(--nav-height) + 16px);
+            right: 16px;
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--elevation-3);
+            cursor: pointer;
+            z-index: 5;
+            border: none;
+            transition: transform var(--transition-emphasized), bottom var(--transition-standard);
+        }
+
+        .fab:active {
+            box-shadow: var(--elevation-1);
+            transform: scale(0.95);
+        }
+
+        .fab.hide {
+            transform: scale(0) rotate(-90deg);
+        }
+
+        .fab.nav-hide {
+            bottom: 16px;
+        }
+
+        /* When nav hides, fab moves down */
+
+        /* LOADER */
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px;
+        }
+
+        .circular-loader {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--md-sys-color-surface-variant);
+            border-top-color: var(--md-sys-color-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ERROR STATE */
+        .error-state {
+            text-align: center;
+            padding: 48px 16px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .error-state .material-symbols-outlined {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .error-btn {
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            border: none;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-weight: 500;
+            margin-top: 16px;
+            cursor: pointer;
+        }
+
+        /* SKELETON */
+        .skeleton {
+            animation: pulse 1.5s infinite ease-in-out;
+            background-color: var(--md-sys-color-surface-container-high);
+            border-radius: 4px;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- TOP APP BAR -->
+        <header class="top-app-bar" id="topbar">
+            <button class="icon-btn" id="tb-nav" style="display:none;" onclick="goBack()">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <div class="top-app-bar-title" id="tb-title">CoolWiki</div>
+            <select class="md-select" id="lang-select" style="margin-right:8px; display:none;"
+                onchange="changeLang(this.value)">
+                <option value="en">EN</option>
+                <option value="es">ES</option>
+                <option value="fr">FR</option>
+                <option value="de">DE</option>
+                <option value="ja">JA</option>
+                <option value="zh">ZH</option>
+            </select>
+            <button class="icon-btn" id="tb-action"
+                onclick="appState.view==='article'?saveCurrentArticle():loadRandom()">
+                <span class="material-symbols-outlined" id="tb-action-icon">casino</span>
+            </button>
+        </header>
+
+        <main id="main-scroll">
+            <!-- HOME / FEED VIEW -->
+            <div id="view-home" class="view active">
+                <div class="container">
+                    <!-- Feed populated here -->
+                    <div id="feed-content">
+                        <div class="loader-container">
+                            <div class="circular-loader"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SAVED VIEW -->
+            <div id="view-saved" class="view">
+                <div class="container">
+                    <div id="saved-list"></div>
+                </div>
+            </div>
+
+            <!-- SEARCH VIEW -->
+            <div id="view-search" class="view">
+                <div class="search-container">
+                    <div class="search-bar">
+                        <span class="material-symbols-outlined"
+                            style="color:var(--md-sys-color-on-surface-variant)">search</span>
+                        <input type="search" class="search-input" id="search-input" placeholder="Search Wikipedia..."
+                            autocomplete="off">
+                        <button class="icon-btn" id="search-clear" style="opacity:0; width:36px; height:36px;"
+                            onclick="document.getElementById('search-input').value=''; document.getElementById('search-input').dispatchEvent(new Event('input'))">
+                            <span class="material-symbols-outlined" style="font-size:20px;">close</span>
+                        </button>
+                    </div>
+                </div>
+                <div id="search-results"></div>
+            </div>
+
+            <!-- SETTINGS VIEW -->
+            <div id="view-settings" class="view">
+                <div class="container">
+                    <h2 class="section-title">App Settings</h2>
+
+                    <div class="pref-item" onclick="toggleTheme()">
+                        <div>
+                            <div class="pref-info-title">Dark Theme</div>
+                            <div class="pref-info-desc">Switch between Light and Dark mode</div>
+                        </div>
+                        <div class="md-switch" id="theme-switch"></div>
+                    </div>
+
+                    <div class="pref-item" onclick="toggleDataSaver()">
+                        <div>
+                            <div class="pref-info-title">Data Saver</div>
+                            <div class="pref-info-desc">Hide images to save mobile data</div>
+                        </div>
+                        <div class="md-switch" id="data-switch"></div>
+                    </div>
+
+                    <div class="pref-item">
+                        <div>
+                            <div class="pref-info-title">Font Size</div>
+                            <div class="pref-info-desc">Adjust reading text size</div>
+                        </div>
+                        <select class="md-select" onchange="setFontSize(this.value)" id="font-select">
+                            <option value="16px">Small</option>
+                            <option value="18px">Medium</option>
+                            <option value="22px">Large</option>
+                            <option value="26px">Extra Large</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ARTICLE VIEW -->
+            <div id="view-article" class="view article-view" style="background:var(--md-sys-color-background)">
+                <div id="article-hero-container"></div>
+                <div class="article-header">
+                    <h1 class="article-title" id="art-title"></h1>
+                    <div class="article-desc" id="art-desc"></div>
+                </div>
+                <div class="article-content" id="art-content"></div>
+            </div>
+        </main>
+
+        <!-- BOTTOM NAVIGATION -->
+        <nav class="bottom-nav" id="bottomnav">
+            <a href="javascript:switchTab('home')" class="nav-item active" id="tab-home">
+                <div class="nav-icon-container"><span class="material-symbols-outlined">explore</span></div>
+                <span class="nav-label">Feed</span>
+            </a>
+            <a href="javascript:switchTab('saved')" class="nav-item" id="tab-saved">
+                <div class="nav-icon-container"><span class="material-symbols-outlined">bookmark</span></div>
+                <span class="nav-label">Saved</span>
+            </a>
+            <a href="javascript:switchTab('search')" class="nav-item" id="tab-search">
+                <div class="nav-icon-container"><span class="material-symbols-outlined">search</span></div>
+                <span class="nav-label">Search</span>
+            </a>
+            <a href="javascript:switchTab('settings')" class="nav-item" id="tab-settings">
+                <div class="nav-icon-container"><span class="material-symbols-outlined">settings</span></div>
+                <span class="nav-label">Settings</span>
+            </a>
+        </nav>
+
+        <!-- FLOATING ACTION BUTTON (Random) -->
+        <button class="fab" id="fabBtn" onclick="loadRandom()">
+            <span class="material-symbols-outlined">casino</span>
+        </button>
+
+    </div>
+
+    <script>
+        /**
+         * WikiReader Web
+         * Material 3 compliant Single Page Application
+         */
+
+        // --- STATE MANAGEMENT ---
+        const appState = {
+            view: 'home', // home, saved, search, settings, article
+            lang: localStorage.getItem('wr_lang') || 'en',
+            theme: localStorage.getItem('wr_theme') || 'system',
+            dataSaver: localStorage.getItem('wr_datasaver') === 'true',
+            fontSize: localStorage.getItem('wr_fontsize') || '18px',
+            historyStack: [],
+            currentArticle: null // Holds raw data for saving
+        };
+
+        // Elements
+        const els = {
+            topbar: document.getElementById('topbar'),
+            bottomnav: document.getElementById('bottomnav'),
+            mainScroll: document.getElementById('main-scroll'),
+            fab: document.getElementById('fabBtn'),
+            tbTitle: document.getElementById('tb-title'),
+            tbNav: document.getElementById('tb-nav'),
+            tbActionIcon: document.getElementById('tb-action-icon'),
+            langSelect: document.getElementById('lang-select')
+        };
+
+        // --- INITIALIZATION ---
+        function init() {
+            applyPreferences();
+            document.getElementById('lang-select').value = appState.lang;
+
+            // Immersive Mode Scroll Listener
+            let lastScrollY = els.mainScroll.scrollTop;
+            els.mainScroll.addEventListener('scroll', () => {
+                const currentScrollY = els.mainScroll.scrollTop;
+                // Topbar shadow
+                if (currentScrollY > 10) els.topbar.classList.add('scrolled');
+                else els.topbar.classList.remove('scrolled');
+
+                // Immersive hide/show inside articles
+                if (appState.view === 'article' || appState.view === 'search') {
+                    if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                        // Scrolling down
+                        els.topbar.classList.add('hide');
+                        els.bottomnav.classList.add('hide');
+                        els.fab.classList.add('nav-hide');
+                    } else {
+                        // Scrolling up
+                        els.topbar.classList.remove('hide');
+                        els.bottomnav.classList.remove('hide');
+                        els.fab.classList.remove('nav-hide');
+                    }
+                }
+                lastScrollY = currentScrollY;
+            }, { passive: true });
+
+            // Search input listener
+            let debounceTimeout;
+            document.getElementById('search-input').addEventListener('input', (e) => {
+                const q = e.target.value.trim();
+                document.getElementById('search-clear').style.opacity = q ? '1' : '0';
+                clearTimeout(debounceTimeout);
+                if (!q) {
+                    document.getElementById('search-results').innerHTML = '';
+                    return;
+                }
+                debounceTimeout = setTimeout(() => doSearch(q), 400);
+            });
+
+            // Load Initial View
+            loadFeed();
+        }
+
+        // --- NAVIGATION & VIEWS ---
+        function switchTab(tabId) {
+            if (appState.view === 'article') {
+                appState.historyStack = []; // Clear stack if clicking tab from article
+            }
+
+            appState.view = tabId;
+
+            // Update Nav visual
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+
+            // Hide all views
+            document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+            document.getElementById('view-' + tabId).classList.add('active');
+
+            // Configure App Bar
+            els.tbNav.style.display = 'none';
+            els.tbTitle.style.marginLeft = '12px';
+            els.langSelect.style.display = 'none';
+            els.bottomnav.classList.remove('hide');
+            els.topbar.classList.remove('hide');
+            els.fab.classList.remove('hide', 'nav-hide');
+            els.tbActionIcon.textContent = 'casino'; // Random icon by default
+            els.mainScroll.scrollTop = 0;
+
+            if (tabId === 'home') {
+                els.tbTitle.textContent = 'WikiReader';
+                els.langSelect.style.display = 'block';
+            } else if (tabId === 'saved') {
+                els.tbTitle.textContent = 'Saved Articles';
+                els.fab.classList.add('hide'); // No random in saved
+                loadSaved();
+            } else if (tabId === 'search') {
+                els.tbTitle.textContent = 'Search';
+                els.fab.classList.add('hide');
+                // auto focus search on desktop, optional on mobile due to keyboard pop
+            } else if (tabId === 'settings') {
+                els.tbTitle.textContent = 'Settings';
+                els.fab.classList.add('hide');
+            }
+        }
+
+        function openArticle(title, pushHistory = true) {
+            if (pushHistory) {
+                appState.historyStack.push({ view: appState.view, title: title });
+            }
+
+            appState.view = 'article';
+            document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+            document.getElementById('view-article').classList.add('active');
+
+            els.mainScroll.scrollTop = 0;
+            els.tbNav.style.display = 'flex';
+            els.tbTitle.style.marginLeft = '0';
+            els.langSelect.style.display = 'none';
+            // Check if article is saved to show appropriate icon
+            const saved = getSavedArticles();
+            const isSaved = saved.some(a => a.title === title);
+            els.tbActionIcon.textContent = isSaved ? 'bookmark_remove' : 'bookmark_add';
+            if (isSaved) els.tbActionIcon.classList.add('icon-filled');
+            else els.tbActionIcon.classList.remove('icon-filled');
+
+            els.fab.classList.add('hide'); // Hide FAB in reading mode (or re-purpose it)
+
+            // Clear previous
+            document.getElementById('art-title').textContent = title;
+            document.getElementById('art-desc').textContent = 'Loading...';
+            document.getElementById('art-content').innerHTML = '<div class="loader-container"><div class="circular-loader"></div></div>';
+            document.getElementById('article-hero-container').innerHTML = '';
+            document.getElementById('view-article').classList.remove('has-hero');
+
+            fetchArticleData(title).then(async data => {
+                if (!data) {
+                    document.getElementById('art-content').innerHTML = `
+        <div class="error-state">
+          <span class="material-symbols-outlined">wifi_off</span>
+          <h3>Content Unavailable</h3>
+          <p>This article might not be available or you are offline.</p>
+        </div>`;
+                    return;
+                }
+                appState.currentArticle = data; // Store for offline save
+                els.tbTitle.textContent = data.title;
+                document.getElementById('art-title').textContent = data.title;
+                document.getElementById('art-desc').textContent = data.description || '';
+
+                // Process HTML
+                let processEl = document.createElement('div');
+                processEl.innerHTML = data.html;
+
+                // Convert math
+                processMath(processEl);
+                cleanArticleHTML(processEl);
+
+                let heroImage = normalizeWikiImageUrl(data.image);
+                if (!heroImage) {
+                    const firstImage = getFirstUsableArticleImage(processEl);
+                    if (firstImage) {
+                        heroImage = firstImage.src;
+                        if (heroImage) {
+                            const removableContainer = firstImage.element.closest('figure, .thumb, .gallerybox');
+                            if (removableContainer) removableContainer.remove();
+                            else firstImage.element.remove();
+                        }
+                    }
+                }
+
+                if (heroImage) {
+                    document.getElementById('view-article').classList.add('has-hero');
+                    document.getElementById('article-hero-container').innerHTML =
+                        `<img src="${heroImage}" class="article-hero" alt="${escapeHtml(data.title)}" onerror="this.remove()">`;
+                }
+
+                document.getElementById('art-content').innerHTML = processEl.innerHTML;
+                enforceReadableBrightBoxes(document.getElementById('art-content'));
+
+                // Add link interceptors
+                document.getElementById('art-content').querySelectorAll('a').forEach(a => {
+                    let href = a.getAttribute('href');
+                    if (href && href.startsWith('./')) {
+                        let wt = decodeURIComponent(href.replace('./', '').split('#')[0]).replace(/_/g, ' ');
+                        a.href = "javascript:void(0)";
+                        a.onclick = (e) => { e.preventDefault(); openArticle(wt); };
+                    } else if (href && href.startsWith('http')) {
+                        a.target = '_blank';
+                    }
+                });
+            });
+        }
+
+        function processMath(element) {
+            // Wikipedia sends math in <math> or <span> config. We wrap katex.
+            element.querySelectorAll('img.mwe-math-fallback-image-inline, img.mwe-math-fallback-image-display').forEach(img => {
+                let tex = img.getAttribute('alt');
+                if (tex) {
+                    // Basic KaTeX render
+                    try {
+                        let span = document.createElement('span');
+                        katex.render(tex.replace(/\\(displaystyle|textstyle)/, '').trim(), span, {
+                            throwOnError: false,
+                            displayMode: img.classList.contains('mwe-math-fallback-image-display')
+                        });
+                        img.parentNode.replaceChild(span, img);
+                    } catch (e) { }
+                }
+            });
+        }
+
+        function cleanArticleHTML(div) {
+            const rm = ['.mw-editsection', '.navbox', '.metadata', '.mbox', '.reflist', '.references', '.toc', '#toc'];
+            rm.forEach(sel => div.querySelectorAll(sel).forEach(el => el.remove()));
+
+            // Fix images src
+            div.querySelectorAll('img').forEach(img => {
+                let src = img.getAttribute('src') || img.getAttribute('data-src') || img.getAttribute('resource');
+                const srcset = img.getAttribute('srcset');
+                if ((!src || src.startsWith('./File:')) && srcset) {
+                    src = srcset.split(',')[0]?.trim().split(' ')[0];
+                }
+                src = normalizeWikiImageUrl(src);
+                if (src) img.src = src;
+                else img.remove();
+            });
+        }
+
+        function getFirstUsableArticleImage(root) {
+            const images = root.querySelectorAll('img');
+            for (const img of images) {
+                const src = normalizeWikiImageUrl(
+                    img.getAttribute('src') || img.getAttribute('data-src') || img.getAttribute('resource')
+                );
+                const width = Number(img.getAttribute('width') || 0);
+                if (!src) continue;
+                if (img.classList.contains('mwe-math-fallback-image-inline') || img.classList.contains('mwe-math-fallback-image-display')) continue;
+                if (src.startsWith('data:')) continue;
+                if (src.includes('/static/images/')) continue;
+                if (src.includes('Special:FilePath')) continue;
+                if (!/\.(png|jpg|jpeg|gif|webp|svg)(\?|$)/i.test(src) && !src.includes('/thumb/')) continue;
+                if (width && width < 120) continue;
+                img.src = src;
+                return { src, element: img };
+            }
+            return null;
+        }
+
+        function normalizeWikiImageUrl(src) {
+            if (!src) return null;
+            let out = String(src).trim();
+            if (!out || out.startsWith('./File:') || out.startsWith('File:')) return null;
+            if (out.startsWith('//')) out = 'https:' + out;
+            else if (out.startsWith('/')) out = `https://${appState.lang}.wikipedia.org${out}`;
+            else if (out.startsWith('./')) out = `https://${appState.lang}.wikipedia.org/wiki/${out.slice(2)}`;
+            if (out.includes('/revision/latest')) return null;
+            return out;
+        }
+
+        function escapeHtml(text) {
+            return String(text)
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#39;');
+        }
+
+        function enforceReadableBrightBoxes(root) {
+            root.querySelectorAll('*').forEach(el => {
+                const style = getComputedStyle(el);
+                const bg = style.backgroundColor;
+                if (!bg || bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent') return;
+                const rgb = bg.match(/\d+(\.\d+)?/g);
+                if (!rgb || rgb.length < 3) return;
+                const [r, g, b] = rgb.slice(0, 3).map(Number);
+                const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+                if (luminance > 0.72) el.classList.add('force-dark-on-light');
+            });
+        }
+
+        function goBack() {
+            if (appState.historyStack.length > 0) {
+                const prev = appState.historyStack.pop();
+                if (prev.view === 'article' && appState.historyStack.length > 0) {
+                    // Go back to previous article
+                    const titleToLoad = appState.historyStack[appState.historyStack.length - 1].title;
+                    appState.historyStack.pop(); // Remove it so openArticle can push it back
+                    openArticle(titleToLoad, true);
+                } else {
+                    // Go back to main tab
+                    switchTab(prev.view);
+                }
+            } else {
+                switchTab('home');
+            }
+        }
+
+        // --- DATA FETCHING (API) ---
+        const getWikiApi = () => `https://${appState.lang}.wikipedia.org/api/rest_v1`;
+        const getActionApi = () => `https://${appState.lang}.wikipedia.org/w/api.php?origin=*&format=json`;
+
+        async function fetchFeed() {
+            const date = new Date();
+            date.setDate(date.getDate() - 1); // Yesterday is safer for feed consistency
+            const y = date.getFullYear(), m = String(date.getMonth() + 1).padStart(2, '0'), d = String(date.getDate()).padStart(2, '0');
+
+            try {
+                const res = await fetch(`${getWikiApi()}/feed/featured/${y}/${m}/${d}`);
+                if (!res.ok) throw new Error();
+                return await res.json();
+            } catch (e) {
+                // Fallback if REST fails
+                return null;
+            }
+        }
+
+        async function fetchArticleData(title) {
+            // First check offline cache
+            const saved = getSavedArticles();
+            const cached = saved.find(a => a.title === title);
+            if (cached && cached.html) return cached;
+
+            try {
+                const [summaryRes, htmlRes] = await Promise.all([
+                    fetch(`${getWikiApi()}/page/summary/${encodeURIComponent(title)}`),
+                    fetch(`${getWikiApi()}/page/html/${encodeURIComponent(title)}`) // REST HTML is cleaner than parse API
+                ]);
+                const summary = await summaryRes.json();
+                const htmlText = await htmlRes.text();
+
+                // Extract body content from HTML response
+                let doc = new DOMParser().parseFromString(htmlText, 'text/html');
+                let bodyHtml = doc.body.innerHTML;
+
+                return {
+                    title: summary.title,
+                    description: summary.description,
+                    image: summary.thumbnail ? summary.thumbnail.source.replace(/\/\d+px-/, '/800px-') : null,
+                    html: bodyHtml
+                };
+            } catch (e) {
+                console.error(e);
+                return null;
+            }
+        }
+
+        async function doSearch(query) {
+            const container = document.getElementById('search-results');
+            container.innerHTML = '<div class="loader-container"><div class="circular-loader"></div></div>';
+
+            try {
+                const res = await fetch(`${getActionApi()}&action=query&list=search&srsearch=${encodeURIComponent(query)}&srlimit=15&prop=pageimages&pithumbsize=100`);
+                const data = await res.json();
+                if (!data.query || !data.query.search.length) {
+                    container.innerHTML = `<div class="error-state">No results found for "${query}"</div>`;
+                    return;
+                }
+
+                // Fetch thumbnails
+                const titles = data.query.search.map(s => s.title).join('|');
+                const thumbRes = await fetch(`${getActionApi()}&action=query&titles=${encodeURIComponent(titles)}&prop=pageimages&pithumbsize=200`);
+                const thumbData = await thumbRes.json();
+                const thumbs = {};
+                if (thumbData.query && thumbData.query.pages) {
+                    Object.values(thumbData.query.pages).forEach(p => { if (p.thumbnail) thumbs[p.title] = p.thumbnail.source; });
+                }
+
+                container.innerHTML = data.query.search.map(s => {
+                    let snippet = s.snippet.replace(/<\/?span[^>]*>/g, '');
+                    let img = thumbs[s.title] || '';
+                    return `
+        <div class="list-item" onclick="openArticle('${s.title.replace(/'/g, "\\'")}')">
+          <div class="list-img material-symbols-outlined" style="display:flex;align-items:center;justify-content:center;font-size:32px;color:var(--md-sys-color-outline);${img ? `background-image:url(${img});background-size:cover;background-position:center;color:transparent;` : ''}">article</div>
+          <div class="list-content">
+            <div class="list-title">${s.title}</div>
+            <div class="list-desc">${snippet}</div>
+          </div>
+        </div>
+        <div class="list-divider"></div>
+      `;
+                }).join('');
+            } catch (e) {
+                container.innerHTML = `<div class="error-state">Search failed.</div>`;
+            }
+        }
+
+        function loadRandom() {
+            showSnackbar("Finding a random article...");
+            fetch(`${getActionApi()}&action=query&generator=random&grnnamespace=0&prop=info`).then(r => r.json())
+                .then(data => {
+                    if (data.query && data.query.pages) {
+                        openArticle(Object.values(data.query.pages)[0].title);
+                    }
+                });
+        }
+
+        // --- UI RENDERING ---
+        function loadFeed() {
+            const container = document.getElementById('feed-content');
+            container.innerHTML = '<div class="loader-container"><div class="circular-loader"></div></div>';
+
+            fetchFeed().then(feed => {
+                if (!feed) {
+                    container.innerHTML = `<div class="error-state"><span class="material-symbols-outlined">network_locked</span><h3>Offline or Unavailable</h3><button class="error-btn" onclick="loadFeed()">Retry</button></div>`;
+                    return;
+                }
+
+                let html = '';
+
+                // Featured
+                if (feed.tfa) {
+                    let img = feed.tfa.thumbnail ? feed.tfa.thumbnail.source.replace(/\/\d+px-/, '/800px-') : '';
+                    let desc = feed.tfa.description || '';
+                    html += `
+        <div class="section-title">Article of the Day</div>
+        <div class="card" onclick="openArticle('${feed.tfa.title.replace(/'/g, "\\'")}')">
+          ${img ? `<img src="${img}" class="card-img" alt="Featured">` : `<div class="card-img" style="display:flex;align-items:center;justify-content:center"><span class="material-symbols-outlined" style="font-size:48px;color:var(--md-sys-color-outline)">image</span></div>`}
+          <div class="card-content">
+            <h3 class="card-title">${feed.tfa.normalizedtitle || feed.tfa.title}</h3>
+            ${desc ? `<div class="card-desc" style="font-weight:500; margin-bottom:8px">${desc}</div>` : ''}
+            <div class="card-desc">${feed.tfa.extract}</div>
+          </div>
+        </div>
+      `;
+                }
+
+                // Trending
+                if (feed.mostread && feed.mostread.articles) {
+                    html += `<div class="section-title">Trending Articles</div>`;
+                    feed.mostread.articles.slice(0, 5).forEach(a => {
+                        let img = a.thumbnail ? a.thumbnail.source : '';
+                        html += `
+          <div class="list-item" onclick="openArticle('${a.title.replace(/'/g, "\\'")}')">
+            <div class="list-img material-symbols-outlined" style="display:flex;align-items:center;justify-content:center;font-size:32px;color:var(--md-sys-color-outline);${img ? `background-image:url(${img});background-size:cover;background-position:center;color:transparent;` : ''}">trending_up</div>
+            <div class="list-content">
+              <div class="list-title">${a.normalizedtitle || a.title}</div>
+              <div class="list-desc">${a.description || ''}</div>
+              <div class="card-meta"><span class="material-symbols-outlined" style="font-size:14px">visibility</span> ${Number(a.views).toLocaleString()} views</div>
+            </div>
+          </div>
+          <div class="list-divider"></div>
+        `;
+                    });
+                }
+
+                container.innerHTML = html;
+            });
+        }
+
+        // --- SAVING FOR OFFLINE ---
+        function getSavedArticles() {
+            try { return JSON.parse(localStorage.getItem('wr_saved')) || []; }
+            catch (e) { return []; }
+        }
+
+        function saveCurrentArticle() {
+            if (!appState.currentArticle) return;
+            let saved = getSavedArticles();
+            const idx = saved.findIndex(a => a.title === appState.currentArticle.title);
+
+            if (idx > -1) {
+                // Remove
+                saved.splice(idx, 1);
+                showSnackbar("Removed from saved articles");
+                els.tbActionIcon.textContent = 'bookmark_add';
+                els.tbActionIcon.classList.remove('icon-filled');
+            } else {
+                // Add (Strip large images or excessive HTML if localstorage quota is a concern, but for SPA we try raw)
+                try {
+                    saved.push({
+                        title: appState.currentArticle.title,
+                        description: appState.currentArticle.description,
+                        image: appState.currentArticle.image,
+                        html: appState.currentArticle.html,
+                        savedAt: Date.now()
+                    });
+                    localStorage.setItem('wr_saved', JSON.stringify(saved));
+                    showSnackbar("Saved for offline reading");
+                    els.tbActionIcon.textContent = 'bookmark_remove';
+                    els.tbActionIcon.classList.add('icon-filled');
+                } catch (e) {
+                    showSnackbar("Storage full. Couldn't save article.");
+                }
+            }
+        }
+
+        function loadSaved() {
+            const container = document.getElementById('saved-list');
+            const saved = getSavedArticles();
+
+            if (saved.length === 0) {
+                container.innerHTML = `
+      <div class="error-state" style="margin-top:20vh">
+        <span class="material-symbols-outlined" style="font-size:64px;opacity:0.5">bookmark_border</span>
+        <h3 style="margin-bottom:8px;color:var(--md-sys-color-on-surface)">No saved articles</h3>
+        <p>Articles you save will appear here for offline reading.</p>
+      </div>
+    `;
+                return;
+            }
+
+            // Sort reverse chronological
+            saved.sort((a, b) => b.savedAt - a.savedAt);
+
+            container.innerHTML = saved.map(s => {
+                let img = s.image ? s.image.replace(/800px-/, '200px-') : '';
+                let date = new Date(s.savedAt).toLocaleDateString();
+                return `
+      <div class="list-item" onclick="openArticle('${s.title.replace(/'/g, "\\'")}')">
+        <div class="list-img material-symbols-outlined" style="display:flex;align-items:center;justify-content:center;font-size:32px;color:var(--md-sys-color-outline);${img ? `background-image:url(${img});background-size:cover;background-position:center;color:transparent;` : ''}">article</div>
+        <div class="list-content">
+          <div class="list-title">${s.title}</div>
+          <div class="list-desc">${s.description || 'Saved offline'}</div>
+          <div class="card-meta">Saved ${date}</div>
+        </div>
+      </div>
+      <div class="list-divider"></div>
+    `;
+            }).join('');
+        }
+
+
+        // --- PREFERENCES ---
+        function applyPreferences() {
+            // Theme
+            let isDark = appState.theme === 'dark';
+            if (appState.theme === 'system') isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.dataset.theme = isDark ? 'dark' : 'light';
+            const ts = document.getElementById('theme-switch');
+            if (ts) isDark ? ts.classList.add('on') : ts.classList.remove('on');
+
+            // Data Saver
+            document.documentElement.dataset.dataSaver = appState.dataSaver;
+            const ds = document.getElementById('data-switch');
+            if (ds) appState.dataSaver ? ds.classList.add('on') : ds.classList.remove('on');
+
+            // Font Size
+            document.documentElement.style.setProperty('--font-size-base', appState.fontSize);
+            const fs = document.getElementById('font-select');
+            if (fs) fs.value = appState.fontSize;
+        }
+
+        function toggleTheme() {
+            let isCurrentlyDark = document.documentElement.dataset.theme === 'dark';
+            appState.theme = isCurrentlyDark ? 'light' : 'dark';
+            localStorage.setItem('wr_theme', appState.theme);
+            applyPreferences();
+        }
+
+        function toggleDataSaver() {
+            appState.dataSaver = !appState.dataSaver;
+            localStorage.setItem('wr_datasaver', appState.dataSaver);
+            applyPreferences();
+            showSnackbar(`Data saver ${appState.dataSaver ? 'enabled' : 'disabled'}`);
+        }
+
+        function setFontSize(val) {
+            appState.fontSize = val;
+            localStorage.setItem('wr_fontsize', val);
+            applyPreferences();
+        }
+
+        function changeLang(val) {
+            appState.lang = val;
+            localStorage.setItem('wr_lang', val);
+            loadFeed();
+        }
+
+        // --- UTILS ---
+        function showSnackbar(msg) {
+            return;
+        }
+
+        // Boot
+        window.addEventListener('popstate', (e) => {
+            // Rough browser back button support
+            goBack();
+        });
+        history.pushState(null, null, window.location.href);
+
+        init();
+
+    </script>
+</body>
+
+</html>
