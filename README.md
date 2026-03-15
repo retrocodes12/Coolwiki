@@ -1,94 +1,187 @@
-# CoolWiki
+<div align="center">
 
-A beautifully designed, single-file Wikipedia client built with pure HTML, CSS, and JavaScript. No frameworks, no build tools — just open it in a browser.
+<img src="fevicon.png" width="110" alt="CoolWiki" />
 
-![Dark Theme](https://img.shields.io/badge/theme-dark%20%7C%20light-gold)
-![Single File](https://img.shields.io/badge/build-single%20file-brightgreen)
-![No Dependencies](https://img.shields.io/badge/dependencies-none-blue)
+<br/>
+
+# C O O L W I K I
+
+*The world's knowledge, dressed for the occasion.*
+
+<br/>
+
+[![Live Demo](https://img.shields.io/badge/◈_Live_Demo-Visit_Site-C4964A?style=for-the-badge&labelColor=0D0C0A)](https://coding-to-void.github.io/Coolwiki/)
+[![Single File](https://img.shields.io/badge/◈_Architecture-Single_File-C4964A?style=for-the-badge&labelColor=0D0C0A)](https://github.com/CODING-to-void/Coolwiki/blob/main/index.html)
+[![No Dependencies](https://img.shields.io/badge/◈_Dependencies-None-C4964A?style=for-the-badge&labelColor=0D0C0A)](https://github.com/CODING-to-void/Coolwiki)
+[![License: MIT](https://img.shields.io/badge/◈_License-MIT-C4964A?style=for-the-badge&labelColor=0D0C0A)](LICENSE)
+
+<br/>
 
 ---
 
-## ✨ Features
+> *Wikipedia was never ugly. The web just forgot how to read.*
 
-- **Article Feed** — Daily featured article and trending Wikipedia articles on the home screen
-- **Full Article View** — Clean, distraction-free reading with hero images and rich formatting
-- **Search** — Real-time Wikipedia search with debounced input
-- **Saved Articles** — Bookmark articles for offline reading via `localStorage`
-- **Random Article** — Discover something new instantly with the dice button
-- **Math Rendering** — LaTeX/KaTeX support for mathematical content
-- **Multi-language** — Switch between EN, ES, FR, DE, JA, and ZH Wikipedia editions
-- **Dark / Light Theme** — Toggle between modes; preference is persisted
-- **Data Saver Mode** — Hide images to reduce bandwidth on mobile
-- **Adjustable Font Size** — Small, Medium, Large, X-Large reading sizes
+---
 
-## 🎨 Design
+</div>
 
-CoolWiki uses a custom *Dark Literary Luxury* design system:
+<br/>
 
-- **Fonts:** Cormorant Garamond (display), Newsreader (reading), DM Mono (UI)
-- **Palette:** Deep charcoal backgrounds with gold accents (`#C4964A`)
-- **Motion:** Silk-eased animations (`cubic-bezier(0.16, 1, 0.3, 1)`)
-- **Nav:** Floating frosted-glass pill with bottom navigation
-- **Texture:** Subtle SVG film grain overlay
+## &nbsp;&nbsp;I.&nbsp;&nbsp; The Premise
 
-## 🚀 Getting Started
+CoolWiki is a **single-file Wikipedia client** — no frameworks, no build pipeline, no installations. One `index.html`. Open it. Read the world.
 
-No installation required.
+It reimagines Wikipedia not as a utility to tolerate, but as a **reading experience to return to** — wrapping the planet's largest encyclopedia in a bespoke *Dark Literary Luxury* design system built from scratch in pure HTML, CSS, and JavaScript.
+
+<br/>
+
+---
+
+## &nbsp;&nbsp;II.&nbsp;&nbsp; Features
+
+<br/>
+
+| &nbsp; | Feature | Description |
+|--------|---------|-------------|
+| `◈` | **Article Feed** | Daily featured articles and trending reads surface automatically on launch |
+| `◈` | **Full Article View** | Distraction-free reading with hero imagery, rich formatting, and rendered math |
+| `◈` | **Real-Time Search** | Debounced search against the Wikipedia API — results as you think |
+| `◈` | **Saved Articles** | Bookmark articles locally; they remain offline in `localStorage` |
+| `◈` | **Random Discovery** | A single dice roll. A world you didn't expect |
+| `◈` | **Multi-Language** | Six Wikipedia editions: `EN` `ES` `FR` `DE` `JA` `ZH` |
+| `◈` | **Dark / Light Mode** | Persisted preference. Silk-smooth transition |
+| `◈` | **Data Saver** | Image suppression for lean reading on limited bandwidth |
+| `◈` | **Font Scaling** | Four reading sizes — Small through X-Large |
+| `◈` | **LaTeX / KaTeX** | Mathematical content renders as it was written to render |
+
+<br/>
+
+---
+
+## &nbsp;&nbsp;III.&nbsp;&nbsp; Design Philosophy
+
+CoolWiki does not merely display information. It **frames** it.
+
+Every typographic decision, every motion curve, every shadow depth was deliberate:
+
+```
+Typefaces  ——  Cormorant Garamond  ·  Newsreader  ·  DM Mono
+Accent     ——  #C4964A  (burnished gold)
+Background ——  #0D0C0A  (near-black charcoal)
+Motion     ——  cubic-bezier(0.16, 1, 0.3, 1)  (silk ease)
+Nav        ——  Floating frosted-glass pill · bottom-anchored
+Texture    ——  Subtle SVG film grain overlay across all surfaces
+```
+
+The result is a reading environment that feels less like an app and more like a private library.
+
+<br/>
+
+---
+
+## &nbsp;&nbsp;IV.&nbsp;&nbsp; Getting Started
+
+No installation. No configuration. No ceremony.
 
 ```bash
-# Clone the repo
-git clone https://github.com/your-username/coolwiki.git
+# Clone the repository
+git clone https://github.com/CODING-to-void/Coolwiki.git
 
-# Open in your browser
+# Open in browser — that's it
 open index.html
 ```
 
-Or just download `index.html` and open it directly — it's entirely self-contained.
+Or download `index.html` directly and open it. The entire application lives inside a single file.
 
-> **Note:** CoolWiki fetches data from the [Wikipedia REST API](https://en.wikipedia.org/api/rest_v1/) and [Wikimedia Feed API](https://api.wikimedia.org/wiki/Feed_API). An internet connection is required to load content; saved articles are available offline.
+> **Note:** Article content is fetched live from the [Wikipedia REST API](https://en.wikipedia.org/api/rest_v1/) and [Wikimedia Feed API](https://api.wikimedia.org). An internet connection is required. Saved articles persist offline via `localStorage`.
 
-## 📁 File Structure
+<br/>
+
+---
+
+## &nbsp;&nbsp;V.&nbsp;&nbsp; File Structure
 
 ```
 coolwiki/
-└── index.html      # The entire app — HTML, CSS, and JS in one file
-└── fevicon.png     # App favicon (optional)
+├── index.html      ← The entire application. HTML, CSS, JS. One file.
+└── fevicon.png     ← The mark.
 ```
 
-## 🔧 Customization
+<br/>
 
-All design tokens live in the `:root` CSS block at the top of `index.html`. You can change the color palette, fonts, and spacing without touching any JavaScript.
+---
+
+## &nbsp;&nbsp;VI.&nbsp;&nbsp; Customization
+
+All design tokens are declared at the top of `index.html` inside a single `:root` block. No JavaScript required to retheme — adjust, reload, and the entire application responds.
 
 ```css
 :root {
-    --bg:      #0D0C0A;   /* background */
-    --gold:    #C4964A;   /* accent color */
+    --bg:           #0D0C0A;   /* primary background    */
+    --gold:         #C4964A;   /* accent — the signature */
     --font-display: 'Cormorant Garamond', serif;
-    /* ... */
+    --font-reading: 'Newsreader', serif;
+    --font-ui:      'DM Mono', monospace;
+    /* ... full token set inside index.html */
 }
 ```
 
-## 📱 Browser Support
+<br/>
 
-Works in all modern browsers. Optimized for mobile with:
-- `viewport-fit=cover` for notch-safe layout
-- `env(safe-area-inset-bottom)` padding
-- Touch-friendly tap targets
-- `overscroll-behavior` for native-feel scrolling
+---
 
-## 🗂️ API Sources
+## &nbsp;&nbsp;VII.&nbsp;&nbsp; API Sources
 
 | Data | Endpoint |
 |------|----------|
 | Featured feed | `https://api.wikimedia.org/feed/v1/wikipedia/{lang}/featured/{date}` |
-| Article content | `https://{lang}.wikipedia.org/api/rest_v1/page/summary/{title}` |
+| Article summary | `https://{lang}.wikipedia.org/api/rest_v1/page/summary/{title}` |
 | Full article HTML | `https://{lang}.wikipedia.org/api/rest_v1/page/mobile-html/{title}` |
 | Search | `https://{lang}.wikipedia.org/w/api.php?action=query&list=search` |
 
-## 📄 License
-
-[MIT](LICENSE) — free to use, modify, and distribute.
+<br/>
 
 ---
 
-> *"The world's knowledge, dressed for the occasion."*
+## &nbsp;&nbsp;VIII.&nbsp;&nbsp; Browser Support
+
+Built for the modern web. Optimized for mobile without compromise.
+
+- `viewport-fit=cover` — notch-safe on all devices
+- `env(safe-area-inset-bottom)` — respects hardware geometry
+- Touch-calibrated tap targets
+- `overscroll-behavior` — native-feel scroll physics
+
+<br/>
+
+---
+
+## &nbsp;&nbsp;IX.&nbsp;&nbsp; License
+
+Released under the **MIT License** — free to use, adapt, and carry forward.
+
+See [`LICENSE`](LICENSE) for the full terms.
+
+<br/>
+
+---
+
+<div align="center">
+
+<br/>
+
+<img src="fevicon.png" width="48" alt="" />
+
+<br/>
+<br/>
+
+*Built with no dependencies. Governed by no framework.*  
+*Just craft, and the conviction that reading should feel like something.*
+
+<br/>
+
+**[↗ Live Site](https://coding-to-void.github.io/Coolwiki/)** &nbsp;·&nbsp; **[↗ Source](https://github.com/CODING-to-void/Coolwiki/blob/main/index.html)**
+
+<br/>
+
+</div>
