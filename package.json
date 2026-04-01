@@ -2,7 +2,7 @@
   "name": "coolwiki",
   "private": true,
   "scripts": {
-    "build:css": "windicss index.html app.js -c windi.config.js -o windi.css --preflight --minify"
+    "build:css": "windicss index.html app.js -f windi.config.js -o windi.css --preflight --minify"
   },
   "devDependencies": {
     "windicss": "^3.5.6"
