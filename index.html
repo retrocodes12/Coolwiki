@@ -1726,6 +1726,765 @@
             text-transform: uppercase;
             color: var(--text-tertiary);
         }
+
+        /* ══════════════════════════════════════
+           EDITORIAL UPGRADE
+        ══════════════════════════════════════ */
+        :root {
+            --accent-blue: #5E6AD2;
+            --accent-blue-soft: rgba(94, 106, 210, 0.18);
+            --accent-sky: #8BAACC;
+            --surface-veil: rgba(255, 255, 255, 0.05);
+            --surface-strong: rgba(255, 255, 255, 0.08);
+            --ambient-blue: rgba(94, 106, 210, 0.18);
+            --ambient-gold: rgba(196, 150, 74, 0.18);
+        }
+
+        [data-theme="light"] {
+            --accent-blue: #335CFF;
+            --accent-blue-soft: rgba(51, 92, 255, 0.12);
+            --surface-veil: rgba(255, 255, 255, 0.74);
+            --surface-strong: rgba(24, 21, 14, 0.08);
+            --ambient-blue: rgba(51, 92, 255, 0.12);
+            --ambient-gold: rgba(154, 110, 37, 0.16);
+        }
+
+        [data-theme="dark"] {
+            color-scheme: dark;
+        }
+
+        [data-theme="light"] {
+            color-scheme: light;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: -16% -8%;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 12% 18%, var(--ambient-blue) 0%, transparent 34%),
+                radial-gradient(circle at 84% 12%, var(--ambient-gold) 0%, transparent 22%),
+                radial-gradient(circle at 50% 112%, rgba(139, 170, 204, 0.1) 0%, transparent 30%);
+            filter: blur(24px);
+            opacity: 0.95;
+            animation: ambient-drift 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes ambient-drift {
+            from { transform: translate3d(0, 0, 0) scale(1); }
+            to   { transform: translate3d(0, -18px, 0) scale(1.04); }
+        }
+
+        #app {
+            position: relative;
+            z-index: 1;
+        }
+
+        main {
+            position: relative;
+        }
+
+        :focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 1px var(--gold), 0 0 0 4px var(--gold-glow);
+        }
+
+        button:focus-visible,
+        a:focus-visible,
+        input:focus-visible,
+        select:focus-visible {
+            outline: none;
+        }
+
+        .home-shell {
+            position: relative;
+            padding-bottom: 24px;
+        }
+
+        .home-stage {
+            --scroll-shift: 0px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 12px;
+            padding: clamp(22px, 3.6vw, 40px);
+            border-radius: 32px;
+            border: 1px solid var(--border);
+            background:
+                linear-gradient(145deg, color-mix(in srgb, var(--bg-raised) 94%, transparent), color-mix(in srgb, var(--bg) 74%, var(--accent-blue) 26%)),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+            box-shadow:
+                var(--shadow-lg),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            isolation: isolate;
+        }
+
+        .home-stage::before {
+            content: '';
+            position: absolute;
+            inset: -26% 36% 22% -10%;
+            z-index: -2;
+            background: radial-gradient(circle, color-mix(in srgb, var(--gold) 42%, transparent) 0%, transparent 68%);
+            filter: blur(14px);
+            opacity: 0.42;
+            transform: translate3d(0, calc(var(--scroll-shift) * -0.3), 0);
+        }
+
+        .home-stage::after {
+            content: '';
+            position: absolute;
+            right: min(8%, 52px);
+            bottom: min(8%, 42px);
+            width: min(36vw, 260px);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            z-index: -1;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow:
+                0 0 0 28px rgba(255, 255, 255, 0.022),
+                0 0 0 72px rgba(255, 255, 255, 0.015);
+            opacity: 0.7;
+            transform: translate3d(0, calc(var(--scroll-shift) * 0.18), 0);
+        }
+
+        .home-grid {
+            display: grid;
+            gap: 20px;
+            align-items: stretch;
+        }
+
+        .hero-copy {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-ui);
+            font-size: 10px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            opacity: 0.92;
+        }
+
+        .hero-kicker::before {
+            content: '';
+            width: 42px;
+            height: 1px;
+            background: linear-gradient(to right, var(--gold), transparent);
+        }
+
+        .hero-title {
+            margin-top: 18px;
+            max-width: 9ch;
+            font-family: var(--font-display);
+            font-size: clamp(3.4rem, 11vw, 7rem);
+            font-weight: 700;
+            line-height: 0.9;
+            letter-spacing: -0.06em;
+            text-wrap: balance;
+        }
+
+        .hero-title .accent {
+            background: linear-gradient(118deg, var(--text-primary) 0%, var(--gold-light) 46%, var(--accent-sky) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            margin-top: 20px;
+            max-width: 34rem;
+            font-family: var(--font-reading);
+            font-size: clamp(17px, 2vw, 22px);
+            line-height: 1.62;
+            color: color-mix(in srgb, var(--text-primary) 72%, var(--text-secondary));
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .hero-btn {
+            appearance: none;
+            border: none;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 50px;
+            padding: 0 18px;
+            font-family: var(--font-ui);
+            font-size: 10.5px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            color: var(--bg);
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            box-shadow: var(--shadow-gold);
+            transition:
+                transform 240ms var(--ease-silk),
+                box-shadow 240ms var(--ease-silk),
+                opacity 200ms var(--ease-standard);
+        }
+
+        .hero-btn.secondary {
+            color: var(--text-primary);
+            background: color-mix(in srgb, var(--bg-raised) 86%, transparent);
+            border: 1px solid var(--border);
+            box-shadow: none;
+        }
+
+        .hero-btn .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .hero-stat {
+            min-height: 138px;
+            padding: 18px 18px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: color-mix(in srgb, var(--bg) 62%, transparent);
+            backdrop-filter: blur(18px) saturate(140%);
+            -webkit-backdrop-filter: blur(18px) saturate(140%);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        }
+
+        .hero-stat-label {
+            display: block;
+            font-family: var(--font-ui);
+            font-size: 8.5px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.9;
+        }
+
+        .hero-stat-value {
+            display: block;
+            margin-top: 16px;
+            font-family: var(--font-display);
+            font-size: clamp(34px, 5vw, 54px);
+            font-weight: 600;
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            color: var(--text-primary);
+        }
+
+        .hero-stat-note {
+            display: block;
+            margin-top: 10px;
+            font-family: var(--font-reading);
+            font-size: 14px;
+            line-height: 1.45;
+            color: var(--text-secondary);
+        }
+
+        .hero-panel-grid {
+            display: grid;
+            gap: 14px;
+            align-content: start;
+        }
+
+        .surface-glow {
+            --glow-x: 50%;
+            --glow-y: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .surface-glow::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            background: radial-gradient(340px circle at var(--glow-x) var(--glow-y), color-mix(in srgb, var(--gold) 22%, transparent), transparent 54%);
+            opacity: 0.45;
+            transition: opacity 250ms var(--ease-standard);
+        }
+
+        .surface-glow::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            mask: linear-gradient(#000, transparent 72%);
+        }
+
+        .tilt-card {
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition: transform 260ms var(--ease-silk), box-shadow 260ms var(--ease-silk);
+        }
+
+        .hero-feature-card,
+        .hero-mini-card,
+        .story-card,
+        .briefing-card,
+        .trend-spotlight,
+        .section-shell {
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            background: color-mix(in srgb, var(--bg-raised) 90%, transparent);
+            box-shadow:
+                var(--shadow-md),
+                inset 0 1px 0 rgba(255, 255, 255, 0.035);
+        }
+
+        .hero-feature-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-height: 260px;
+            padding: 22px;
+            background:
+                linear-gradient(155deg, color-mix(in srgb, var(--accent-blue) 26%, var(--bg-raised)) 0%, color-mix(in srgb, var(--bg) 88%, transparent) 100%);
+        }
+
+        .hero-feature-label,
+        .hero-mini-label,
+        .story-card-kicker,
+        .briefing-kicker,
+        .trend-spotlight-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-ui);
+            font-size: 8.5px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.92;
+        }
+
+        .hero-feature-title {
+            margin-top: 14px;
+            max-width: 10ch;
+            font-family: var(--font-display);
+            font-size: clamp(30px, 4vw, 46px);
+            font-weight: 600;
+            line-height: 0.98;
+            letter-spacing: -0.04em;
+            color: var(--text-primary);
+        }
+
+        .hero-feature-desc,
+        .hero-mini-copy,
+        .story-card-desc,
+        .briefing-copy,
+        .trend-spotlight-desc {
+            margin-top: 12px;
+            font-family: var(--font-reading);
+            font-size: 14px;
+            line-height: 1.58;
+            color: var(--text-secondary);
+        }
+
+        .hero-feature-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .hero-chip {
+            display: inline-flex;
+            align-items: center;
+            min-height: 28px;
+            padding: 0 12px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: color-mix(in srgb, var(--bg) 58%, transparent);
+            font-family: var(--font-ui);
+            font-size: 8px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .hero-mini-stack {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .hero-mini-card {
+            min-height: 156px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background:
+                linear-gradient(160deg, color-mix(in srgb, var(--bg-raised) 88%, transparent), color-mix(in srgb, var(--bg-elevated) 78%, var(--accent-blue-soft) 22%));
+        }
+
+        .hero-mini-value {
+            margin-top: 10px;
+            font-family: var(--font-display);
+            font-size: clamp(24px, 3vw, 34px);
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+        }
+
+        .home-shell .ticker-wrap {
+            margin-top: 18px !important;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: color-mix(in srgb, var(--bg-raised) 88%, transparent);
+            backdrop-filter: blur(18px) saturate(140%);
+            -webkit-backdrop-filter: blur(18px) saturate(140%);
+        }
+
+        .home-shell .ticker-wrap::before {
+            left: 0;
+            width: 68px;
+        }
+
+        .home-shell .ticker-wrap::after {
+            right: 0;
+            width: 68px;
+        }
+
+        .home-story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .story-card {
+            min-height: 220px;
+            padding: 20px;
+            background:
+                linear-gradient(155deg, color-mix(in srgb, var(--bg-raised) 90%, transparent), color-mix(in srgb, var(--bg) 76%, var(--accent-blue-soft) 24%));
+        }
+
+        .story-card-icon {
+            width: 46px;
+            height: 46px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            border: 1px solid var(--border-gold);
+            background: var(--gold-dim);
+            color: var(--gold);
+        }
+
+        .story-card-icon .material-symbols-outlined {
+            font-size: 22px;
+        }
+
+        .story-card-title {
+            margin-top: 18px;
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 1.02;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+            text-wrap: balance;
+        }
+
+        .story-card-kicker {
+            margin-top: 18px;
+        }
+
+        #feed-content {
+            margin-top: 18px;
+        }
+
+        .section-shell {
+            padding: 18px;
+            margin-bottom: 16px;
+            background:
+                linear-gradient(160deg, color-mix(in srgb, var(--bg-raised) 92%, transparent), color-mix(in srgb, var(--bg) 82%, var(--accent-blue-soft) 18%));
+        }
+
+        .section-shell .section-title {
+            margin-top: 0;
+        }
+
+        .feature-grid,
+        .trending-layout {
+            display: grid;
+            gap: 16px;
+        }
+
+        .briefing-card {
+            min-height: 100%;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background:
+                linear-gradient(165deg, color-mix(in srgb, var(--bg-elevated) 92%, transparent), color-mix(in srgb, var(--bg) 78%, var(--gold-dim) 22%));
+        }
+
+        .briefing-card.compact {
+            min-height: 220px;
+            cursor: pointer;
+        }
+
+        .briefing-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .briefing-title,
+        .trend-spotlight-title {
+            margin-top: 14px;
+            font-family: var(--font-display);
+            font-size: clamp(28px, 4.2vw, 42px);
+            font-weight: 600;
+            line-height: 0.98;
+            letter-spacing: -0.04em;
+            color: var(--text-primary);
+            text-wrap: balance;
+        }
+
+        .briefing-list {
+            display: grid;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .briefing-item {
+            display: flex;
+            gap: 12px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+        }
+
+        .briefing-index {
+            min-width: 28px;
+            font-family: var(--font-ui);
+            font-size: 9px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--gold);
+            padding-top: 2px;
+        }
+
+        .briefing-item-title {
+            font-family: var(--font-display);
+            font-size: 19px;
+            font-weight: 600;
+            line-height: 1.15;
+            color: var(--text-primary);
+        }
+
+        .briefing-item-desc {
+            margin-top: 4px;
+            font-family: var(--font-reading);
+            font-size: 13px;
+            line-height: 1.45;
+            color: var(--text-secondary);
+        }
+
+        .spotlight-stack {
+            display: grid;
+            gap: 16px;
+        }
+
+        .trend-spotlight {
+            min-height: 100%;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            background:
+                linear-gradient(160deg, color-mix(in srgb, var(--bg-raised) 80%, transparent), color-mix(in srgb, var(--accent-blue) 18%, var(--bg)));
+        }
+
+        .trend-spotlight-metric {
+            margin-top: 18px;
+            font-family: var(--font-ui);
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+        }
+
+        .list-cluster {
+            border-radius: 22px;
+            border: 1px solid var(--border);
+            background: color-mix(in srgb, var(--bg-raised) 86%, transparent);
+            padding: 8px 14px 4px;
+        }
+
+        .list-item {
+            padding: 16px 10px;
+            border-radius: 18px;
+        }
+
+        .list-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background:
+                linear-gradient(135deg, color-mix(in srgb, var(--gold) 10%, transparent), transparent 60%);
+            opacity: 0;
+            transition: opacity 220ms var(--ease-standard);
+        }
+
+        .list-item > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .list-img {
+            width: 62px;
+            height: 62px;
+            border-radius: 14px;
+        }
+
+        .list-divider {
+            margin-left: 92px;
+        }
+
+        .search-container {
+            border-bottom: 1px solid var(--border);
+            background: color-mix(in srgb, var(--bg) 72%, transparent);
+        }
+
+        .search-bar,
+        .pref-item {
+            background: color-mix(in srgb, var(--bg-raised) 88%, transparent);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition:
+                opacity 700ms var(--ease-silk),
+                transform 700ms var(--ease-silk);
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (hover: hover) {
+            .hero-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 28px rgba(196, 150, 74, 0.28);
+            }
+
+            .hero-btn.secondary:hover {
+                box-shadow: var(--shadow-sm);
+            }
+
+            .surface-glow:hover::before,
+            .list-item:hover::before {
+                opacity: 0.8;
+            }
+
+            .hero-feature-card:hover,
+            .hero-mini-card:hover,
+            .story-card:hover,
+            .briefing-card:hover,
+            .trend-spotlight:hover {
+                border-color: var(--border-gold);
+                box-shadow: var(--shadow-lg);
+            }
+        }
+
+        @media (min-width: 920px) {
+            .home-grid,
+            .feature-grid,
+            .trending-layout {
+                grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .home-stage {
+                padding: 22px 18px;
+                border-radius: 28px;
+            }
+
+            .hero-title {
+                max-width: 7ch;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .hero-btn {
+                width: 100%;
+            }
+
+            .hero-mini-stack {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stat {
+                min-height: 126px;
+            }
+
+            .section-shell {
+                padding: 16px;
+            }
+
+            .home-shell .ticker-wrap {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html:focus-within {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .ticker-track {
+                animation: none !important;
+                transform: translateX(0) !important;
+            }
+
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
     </style>
 </head>
 
@@ -1758,13 +2517,92 @@
         <main id="main-scroll">
             <!-- HOME / FEED VIEW -->
             <div id="view-home" class="view active">
-                <div class="container">
+                <div class="container home-shell">
+                    <section class="home-stage" id="home-stage">
+                        <div class="home-grid">
+                            <div class="hero-copy">
+                                <div class="hero-kicker">Wikipedia, recut as a living front page</div>
+                                <h1 class="hero-title">The world's knowledge, <span class="accent">with a pulse.</span></h1>
+                                <p class="hero-subtitle">CoolWiki turns Wikipedia into an editorial reading experience: daily features, live trends, instant search, and an offline shelf that feels curated instead of cached.</p>
+                                <div class="hero-actions">
+                                    <button class="hero-btn" type="button" onclick="switchTab('search')">
+                                        <span class="material-symbols-outlined">search</span>
+                                        Search the archive
+                                    </button>
+                                    <button class="hero-btn secondary" type="button" onclick="loadRandom()">
+                                        <span class="material-symbols-outlined">casino</span>
+                                        Drop me somewhere strange
+                                    </button>
+                                </div>
+                                <div class="hero-stats">
+                                    <div class="hero-stat reveal">
+                                        <span class="hero-stat-label">Editions</span>
+                                        <strong class="hero-stat-value" id="hero-language-count">06</strong>
+                                        <span class="hero-stat-note" id="hero-language-label">Wikipedia languages live</span>
+                                    </div>
+                                    <div class="hero-stat reveal">
+                                        <span class="hero-stat-label">Shelf</span>
+                                        <strong class="hero-stat-value" id="hero-saved-count">00</strong>
+                                        <span class="hero-stat-note">articles ready for offline reading</span>
+                                    </div>
+                                    <div class="hero-stat reveal">
+                                        <span class="hero-stat-label">Edition</span>
+                                        <strong class="hero-stat-value" id="hero-date-pill">Today</strong>
+                                        <span class="hero-stat-note">daily briefing refreshed live</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hero-panel-grid">
+                                <article class="hero-feature-card tilt-card surface-glow" id="hero-feature-card">
+                                    <div class="hero-feature-label">Daily briefing</div>
+                                    <h2 class="hero-feature-title" id="hero-feature-title">Loading the atlas.</h2>
+                                    <p class="hero-feature-desc" id="hero-feature-desc">Featured reads, historical echoes, and the strongest live topics will appear here in a second.</p>
+                                    <div class="hero-feature-footer">
+                                        <span class="hero-chip" id="hero-lang-pill">EN edition</span>
+                                        <span class="hero-chip" id="hero-action-pill">Live feed</span>
+                                    </div>
+                                </article>
+                                <div class="hero-mini-stack">
+                                    <article class="hero-mini-card tilt-card surface-glow">
+                                        <div class="hero-mini-label">Radar</div>
+                                        <div class="hero-mini-value" id="hero-trend-headline">Trending now</div>
+                                        <p class="hero-mini-copy" id="hero-trend-copy">Most-read topics will land here once the daily feed is in.</p>
+                                    </article>
+                                    <article class="hero-mini-card tilt-card surface-glow">
+                                        <div class="hero-mini-label">Mode</div>
+                                        <div class="hero-mini-value">Search. Save. Wander.</div>
+                                        <p class="hero-mini-copy">Built for quick entry points and long-form reading, with motion that stays out of the way.</p>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                     <!-- MARQUEE TICKER -->
-                    <div class="ticker-wrap" id="feed-ticker" style="margin-top:8px;">
+                    <div class="ticker-wrap" id="feed-ticker">
                         <div class="ticker-track" id="ticker-track">
                             <!-- Populated by JS -->
                         </div>
                     </div>
+                    <section class="home-story-grid">
+                        <article class="story-card tilt-card surface-glow reveal">
+                            <div class="story-card-icon"><span class="material-symbols-outlined">auto_stories</span></div>
+                            <div class="story-card-kicker">Daily edit</div>
+                            <h3 class="story-card-title">A front page that feels curated, not dumped.</h3>
+                            <p class="story-card-desc">Featured pieces, trending topics, and historical context get framed like a magazine issue instead of a raw API response.</p>
+                        </article>
+                        <article class="story-card tilt-card surface-glow reveal">
+                            <div class="story-card-icon"><span class="material-symbols-outlined">travel_explore</span></div>
+                            <div class="story-card-kicker">Rabbit holes</div>
+                            <h3 class="story-card-title">Random discovery with better atmosphere.</h3>
+                            <p class="story-card-desc">Jump from article to article without the default web chrome flattening every idea into the same plain utility surface.</p>
+                        </article>
+                        <article class="story-card tilt-card surface-glow reveal">
+                            <div class="story-card-icon"><span class="material-symbols-outlined">bookmark</span></div>
+                            <div class="story-card-kicker">Offline shelf</div>
+                            <h3 class="story-card-title">Save the pieces worth returning to.</h3>
+                            <p class="story-card-desc">Bookmarks stay local, ready for low-signal reading sessions, study stacks, or a private archive of things worth keeping.</p>
+                        </article>
+                    </section>
                     <div id="feed-content">
                         <div class="loader-container">
                             <div class="circular-loader"></div>
@@ -1841,12 +2679,12 @@
             <!-- ARTICLE VIEW -->
             <div id="view-article" class="view article-view">
                 <div id="article-hero-container"></div>
-                <div class="article-header">
+                <div class="article-header reveal">
                     <h1 class="article-title" id="art-title"></h1>
                     <div class="article-desc" id="art-desc"></div>
                     <div class="art-meta-row" id="art-meta-row" style="display:none; margin-top:16px; margin-bottom:0;"></div>
                 </div>
-                <div class="article-content" id="art-content"></div>
+                <div class="article-content reveal" id="art-content"></div>
             </div>
         </main>
 
@@ -1906,6 +2744,17 @@
             langSelect: document.getElementById('lang-select')
         };
 
+        const langNames = {
+            en: 'English',
+            es: 'Spanish',
+            fr: 'French',
+            de: 'German',
+            ja: 'Japanese',
+            zh: 'Chinese'
+        };
+
+        let revealObserver = null;
+
         // --- INIT ---
         function init() {
             applyPreferences();
@@ -1913,12 +2762,17 @@
 
             // Populate ticker
             buildTicker();
+            initRevealObserver();
+            observeReveals(document);
+            bindSurfaceTilt(document);
+            syncHomeStage();
 
             const progressBar = document.getElementById('reading-progress');
 
             let lastScrollY = els.mainScroll.scrollTop;
             els.mainScroll.addEventListener('scroll', () => {
                 const currentScrollY = els.mainScroll.scrollTop;
+                const homeStage = document.getElementById('home-stage');
 
                 // Reading progress bar
                 if (appState.view === 'article') {
@@ -1929,6 +2783,13 @@
                 } else {
                     progressBar.style.width = '0%';
                     progressBar.classList.remove('visible');
+                }
+
+                if (homeStage && appState.view === 'home') {
+                    const shift = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                        ? 0
+                        : Math.min(currentScrollY, 320) * 0.35;
+                    homeStage.style.setProperty('--scroll-shift', `${shift}px`);
                 }
 
                 if (appState.view === 'article' || appState.view === 'search') {
@@ -1994,6 +2855,7 @@
                 els.tbTitle.textContent = 'CoolWiki';
                 els.tbTitle.classList.add('wordmark');
                 els.langSelect.style.display = 'block';
+                syncHomeStage();
             } else if (tabId === 'saved') {
                 els.tbTitle.textContent = 'Saved';
                 els.tbTitle.classList.remove('wordmark');
@@ -2007,6 +2869,12 @@
                 els.tbTitle.textContent = 'Settings';
                 els.tbTitle.classList.remove('wordmark');
                 els.fab.classList.add('hide');
+            }
+
+            const activeView = document.getElementById('view-' + tabId);
+            if (activeView) {
+                observeReveals(activeView);
+                bindSurfaceTilt(activeView);
             }
         }
 
@@ -2038,6 +2906,8 @@
             document.getElementById('art-content').innerHTML = '<div class="loader-container"><div class="circular-loader"></div></div>';
             document.getElementById('article-hero-container').innerHTML = '';
             document.getElementById('view-article').classList.remove('has-hero');
+            document.querySelector('#view-article .article-header')?.classList.add('is-visible');
+            document.getElementById('art-content').classList.add('is-visible');
             const metaRowReset = document.getElementById('art-meta-row');
             if (metaRowReset) { metaRowReset.style.display = 'none'; metaRowReset.innerHTML = ''; }
 
@@ -2111,6 +2981,8 @@
                         a.target = '_blank';
                     }
                 });
+
+                observeReveals(document.getElementById('view-article'));
             });
         }
 
@@ -2320,6 +3192,132 @@
             ).join('');
         }
 
+        function initRevealObserver() {
+            if (revealObserver) revealObserver.disconnect();
+
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+                document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+                revealObserver = null;
+                return;
+            }
+
+            revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
+                });
+            }, {
+                root: els.mainScroll,
+                threshold: 0.18,
+                rootMargin: '0px 0px -10% 0px'
+            });
+        }
+
+        function observeReveals(root = document) {
+            const items = root && root.querySelectorAll ? root.querySelectorAll('.reveal') : [];
+            if (!items.length) return;
+            if (!revealObserver) {
+                items.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            items.forEach(el => {
+                if (el.classList.contains('is-visible')) return;
+                revealObserver.observe(el);
+            });
+        }
+
+        function bindSurfaceTilt(root = document) {
+            const cards = root && root.querySelectorAll ? root.querySelectorAll('.tilt-card') : [];
+            const supportsHover = window.matchMedia('(hover: hover)').matches;
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            cards.forEach((card) => {
+                if (card.dataset.tiltBound === 'true') return;
+                card.dataset.tiltBound = 'true';
+
+                const reset = () => {
+                    card.style.transform = '';
+                    card.style.setProperty('--glow-x', '50%');
+                    card.style.setProperty('--glow-y', '50%');
+                };
+
+                reset();
+
+                if (!supportsHover || reducedMotion) return;
+
+                card.addEventListener('pointermove', (event) => {
+                    const rect = card.getBoundingClientRect();
+                    const px = ((event.clientX - rect.left) / rect.width) * 100;
+                    const py = ((event.clientY - rect.top) / rect.height) * 100;
+                    const rotateY = ((px - 50) / 50) * 5;
+                    const rotateX = ((50 - py) / 50) * 4;
+
+                    card.style.setProperty('--glow-x', `${px}%`);
+                    card.style.setProperty('--glow-y', `${py}%`);
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+                });
+
+                card.addEventListener('pointerleave', reset);
+                card.addEventListener('pointercancel', reset);
+                card.addEventListener('pointerup', reset);
+            });
+        }
+
+        function syncHomeStage(feed = null) {
+            const savedCountEl = document.getElementById('hero-saved-count');
+            const dateEl = document.getElementById('hero-date-pill');
+            const languageCountEl = document.getElementById('hero-language-count');
+            const languageLabelEl = document.getElementById('hero-language-label');
+            const heroLangPill = document.getElementById('hero-lang-pill');
+            const heroActionPill = document.getElementById('hero-action-pill');
+            const featureCard = document.getElementById('hero-feature-card');
+            const featureTitle = document.getElementById('hero-feature-title');
+            const featureDesc = document.getElementById('hero-feature-desc');
+            const trendHeadline = document.getElementById('hero-trend-headline');
+            const trendCopy = document.getElementById('hero-trend-copy');
+            const saved = getSavedArticles();
+
+            if (savedCountEl) savedCountEl.textContent = String(saved.length).padStart(2, '0');
+            if (dateEl) {
+                dateEl.textContent = new Date().toLocaleDateString(undefined, {
+                    month: 'short',
+                    day: 'numeric'
+                });
+            }
+            if (languageCountEl) languageCountEl.textContent = '06';
+            if (languageLabelEl) languageLabelEl.textContent = `${langNames[appState.lang] || 'Global'} edition active`;
+            if (heroLangPill) heroLangPill.textContent = `${appState.lang.toUpperCase()} edition`;
+            if (heroActionPill) heroActionPill.textContent = appState.dataSaver ? 'Data saver on' : 'Live feed';
+
+            if (featureCard) {
+                featureCard.onclick = null;
+                featureCard.style.cursor = 'default';
+            }
+
+            if (feed && feed.tfa) {
+                if (featureTitle) featureTitle.textContent = feed.tfa.normalizedtitle || feed.tfa.title;
+                if (featureDesc) featureDesc.textContent = feed.tfa.description || "Today's featured article is ready to read.";
+                if (featureCard) {
+                    featureCard.onclick = () => openArticle(feed.tfa.title);
+                    featureCard.style.cursor = 'pointer';
+                }
+            } else {
+                if (featureTitle) featureTitle.textContent = 'Loading the atlas.';
+                if (featureDesc) featureDesc.textContent = 'Featured reads, historical echoes, and the strongest live topics will appear here in a second.';
+            }
+
+            const mostRead = feed && feed.mostread && feed.mostread.articles ? feed.mostread.articles : [];
+            if (mostRead.length) {
+                const lead = mostRead[0];
+                if (trendHeadline) trendHeadline.textContent = lead.normalizedtitle || lead.title;
+                if (trendCopy) trendCopy.textContent = `${Number(lead.views).toLocaleString()} views and climbing in the ${langNames[appState.lang] || 'selected'} edition.`;
+            } else {
+                if (trendHeadline) trendHeadline.textContent = 'Trending now';
+                if (trendCopy) trendCopy.textContent = 'Most-read topics will land here once the daily feed is in.';
+            }
+        }
+
         // --- READ TIME ---
         function calcReadTime(htmlStr) {
             const text = htmlStr.replace(/<[^>]+>/g, '');
@@ -2328,7 +3326,7 @@
         }
 
         // --- STAGGER ANIMATE ---
-        function staggerAnimate(container, selector = '.list-item, .card, .otd-strip') {
+        function staggerAnimate(container, selector = '.list-item, .card, .otd-strip, .briefing-card, .trend-spotlight') {
             const items = container.querySelectorAll(selector);
             items.forEach((el, i) => {
                 el.style.animationDelay = `${i * 55}ms`;
@@ -2340,9 +3338,11 @@
         function loadFeed() {
             const container = document.getElementById('feed-content');
             container.innerHTML = '<div class="loader-container"><div class="circular-loader"></div></div>';
+            syncHomeStage();
 
             fetchFeed().then(feed => {
                 if (!feed) {
+                    syncHomeStage();
                     container.innerHTML = `
                         <div class="error-state" style="margin-top:25vh">
                             <span class="material-symbols-outlined">network_locked</span>
@@ -2359,71 +3359,138 @@
                     buildTicker(topics);
                 }
 
+                syncHomeStage(feed);
+
+                const mostRead = feed.mostread && feed.mostread.articles ? feed.mostread.articles.slice(0, 6) : [];
                 let html = '';
 
-                if (feed.tfa) {
-                    let img  = feed.tfa.thumbnail ? feed.tfa.thumbnail.source.replace(/\/\d+px-/, '/800px-') : '';
-                    let desc = feed.tfa.description || '';
-                    html += `
-                        <div class="section-title" style="margin-top:22px;">Article of the Day</div>
-                        <div class="card hero-card" onclick="openArticle('${feed.tfa.title.replace(/'/g, "\\'")}')">
-                            <div class="card-badge">✦ &nbsp;Today's Feature</div>
-                            ${img
-                                ? `<img src="${img}" class="card-img" alt="Featured">`
-                                : `<div class="card-img-placeholder"><span class="material-symbols-outlined" style="font-size:44px;color:var(--text-tertiary)">image</span></div>`
-                            }
-                            <div class="card-content">
-                                <div class="card-meta">${new Date().toLocaleDateString(undefined,{month:'long',day:'numeric',year:'numeric'})}</div>
-                                <h3 class="card-title">${feed.tfa.normalizedtitle || feed.tfa.title}</h3>
-                                ${desc ? `<div class="card-desc">${desc}</div>` : ''}
+                if (feed.tfa || mostRead.length) {
+                    const briefingItems = mostRead.slice(0, 3).map((article, idx) => `
+                        <div class="briefing-item">
+                            <div class="briefing-index">${String(idx + 1).padStart(2, '0')}</div>
+                            <div>
+                                <div class="briefing-item-title">${escapeHtml(article.normalizedtitle || article.title)}</div>
+                                <div class="briefing-item-desc">${escapeHtml(article.description || 'Live from the current feed.')}</div>
                             </div>
-                        </div>`;
+                        </div>`).join('');
+
+                    html += `
+                        <section class="section-shell reveal">
+                            <div class="section-title">Daily Edition</div>
+                            <div class="feature-grid">
+                                ${feed.tfa ? `
+                                    <div class="card hero-card tilt-card surface-glow" onclick="openArticle('${feed.tfa.title.replace(/'/g, "\\'")}')">
+                                        <div class="card-badge">Featured edit</div>
+                                        ${feed.tfa.thumbnail
+                                            ? `<img src="${feed.tfa.thumbnail.source.replace(/\/\d+px-/, '/800px-')}" class="card-img" alt="Featured">`
+                                            : `<div class="card-img-placeholder"><span class="material-symbols-outlined" style="font-size:44px;color:var(--text-tertiary)">image</span></div>`
+                                        }
+                                        <div class="card-content">
+                                            <div class="card-meta">${new Date().toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}</div>
+                                            <h3 class="card-title">${escapeHtml(feed.tfa.normalizedtitle || feed.tfa.title)}</h3>
+                                            ${feed.tfa.description ? `<div class="card-desc">${escapeHtml(feed.tfa.description)}</div>` : ''}
+                                        </div>
+                                    </div>` : ''}
+                                <aside class="briefing-card tilt-card surface-glow">
+                                    <div>
+                                        <div class="briefing-top">
+                                            <div class="briefing-kicker">Field notes</div>
+                                            <span class="hero-chip">${appState.lang.toUpperCase()} edition</span>
+                                        </div>
+                                        <h3 class="briefing-title">Today's map of the encyclopedia.</h3>
+                                        <p class="briefing-copy">Featured stories, live momentum, and the sharpest reading detours from the current Wikipedia feed.</p>
+                                    </div>
+                                    <div class="briefing-list">
+                                        ${briefingItems || `
+                                            <div class="briefing-item">
+                                                <div class="briefing-index">00</div>
+                                                <div>
+                                                    <div class="briefing-item-title">Waiting on the feed</div>
+                                                    <div class="briefing-item-desc">The daily briefing will populate here once the API responds.</div>
+                                                </div>
+                                            </div>`}
+                                    </div>
+                                </aside>
+                            </div>
+                        </section>`;
                 }
 
-                // On This Day strip
-                if (feed.onthisday && feed.onthisday.length) {
-                    const otd = feed.onthisday[0];
-                    const otdTitle = otd.pages && otd.pages[0] ? (otd.pages[0].normalizedtitle || otd.pages[0].title) : '';
-                    const otdPage = otd.pages && otd.pages[0] ? otd.pages[0].title : '';
+                const leadTrend = mostRead[0];
+                const secondTrend = mostRead[1];
+                if (leadTrend || (feed.onthisday && feed.onthisday.length)) {
+                    const otd = feed.onthisday && feed.onthisday.length ? feed.onthisday[0] : null;
+                    const otdTitle = otd && otd.pages && otd.pages[0] ? (otd.pages[0].normalizedtitle || otd.pages[0].title) : '';
+                    const otdPage = otd && otd.pages && otd.pages[0] ? otd.pages[0].title : '';
                     const today = new Date();
-                    const dateStr = today.toLocaleDateString(undefined,{month:'long',day:'numeric'});
-                    if (otdTitle && otdPage) {
-                        html += `
-                        <div class="section-title">On This Day</div>
-                        <div class="otd-strip" onclick="openArticle('${otdPage.replace(/'/g, "\\'")}')">
-                            <div class="otd-corner">${today.getDate()}</div>
-                            <div class="otd-label">✦ &nbsp;${dateStr}</div>
-                            <div class="otd-title">${otdTitle}</div>
-                            <div class="otd-desc">${otd.text || ''}</div>
-                        </div>`;
-                    }
+                    const dateStr = today.toLocaleDateString(undefined, { month: 'long', day: 'numeric' });
+
+                    html += `
+                        <section class="section-shell reveal">
+                            <div class="section-title">Pulse</div>
+                            <div class="trending-layout">
+                                ${leadTrend ? `
+                                    <article class="trend-spotlight tilt-card surface-glow" onclick="openArticle('${leadTrend.title.replace(/'/g, "\\'")}')">
+                                        <div>
+                                            <div class="trend-spotlight-label">Most read right now</div>
+                                            <h3 class="trend-spotlight-title">${escapeHtml(leadTrend.normalizedtitle || leadTrend.title)}</h3>
+                                            <p class="trend-spotlight-desc">${escapeHtml(leadTrend.description || 'One of the strongest signals in the live reading feed.')}</p>
+                                        </div>
+                                        <div class="trend-spotlight-metric">${Number(leadTrend.views).toLocaleString()} live views</div>
+                                    </article>` : ''}
+                                <div class="spotlight-stack">
+                                    ${otdTitle && otdPage ? `
+                                        <div class="otd-strip tilt-card surface-glow" onclick="openArticle('${otdPage.replace(/'/g, "\\'")}')">
+                                            <div class="otd-corner">${today.getDate()}</div>
+                                            <div class="otd-label">${dateStr}</div>
+                                            <div class="otd-title">${escapeHtml(otdTitle)}</div>
+                                            <div class="otd-desc">${escapeHtml(otd.text || '')}</div>
+                                        </div>` : ''}
+                                    ${secondTrend ? `
+                                        <div class="briefing-card compact tilt-card surface-glow" onclick="openArticle('${secondTrend.title.replace(/'/g, "\\'")}')">
+                                            <div>
+                                                <div class="briefing-kicker">Also moving</div>
+                                                <h3 class="briefing-title">${escapeHtml(secondTrend.normalizedtitle || secondTrend.title)}</h3>
+                                                <p class="briefing-copy">${escapeHtml(secondTrend.description || 'Another article climbing through the live feed.')}</p>
+                                            </div>
+                                            <div class="hero-chip">${Number(secondTrend.views).toLocaleString()} views</div>
+                                        </div>` : ''}
+                                </div>
+                            </div>
+                        </section>`;
                 }
 
-                if (feed.mostread && feed.mostread.articles) {
-                    html += `<div class="section-title">Trending <span class="section-count">${Math.min(5, feed.mostread.articles.length)}</span></div>`;
-                    feed.mostread.articles.slice(0, 5).forEach((a, idx) => {
-                        let img = a.thumbnail ? a.thumbnail.source : '';
+                if (mostRead.length) {
+                    html += `<section class="section-shell reveal">
+                        <div class="section-title">Trending <span class="section-count">${Math.min(5, mostRead.length)}</span></div>
+                        <div class="list-cluster">`;
+                    mostRead.slice(0, 5).forEach((article, idx) => {
+                        const img = article.thumbnail ? article.thumbnail.source : '';
                         html += `
-                            <div class="list-item" onclick="openArticle('${a.title.replace(/'/g, "\\'")}')">
-                                <span class="rank-badge">${String(idx + 1).padStart(2,'0')}</span>
-                                <div class="list-img" style="${img ? `background-image:url(${img});background-size:cover;background-position:center;` : 'display:flex;align-items:center;justify-content:center;'}">
-                                    ${!img ? '<span class="material-symbols-outlined" style="font-size:20px;color:var(--text-tertiary)">trending_up</span>' : ''}
-                                </div>
-                                <div class="list-content">
-                                    <div class="list-title">${a.normalizedtitle || a.title}</div>
-                                    <div class="list-desc">${a.description || ''}</div>
-                                    <div class="card-meta" style="margin-top:6px">
-                                        <span class="material-symbols-outlined" style="font-size:11px">bar_chart</span>
-                                        ${Number(a.views).toLocaleString()} views
+                                <div class="list-item" onclick="openArticle('${article.title.replace(/'/g, "\\'")}')">
+                                    <span class="rank-badge">${String(idx + 1).padStart(2, '0')}</span>
+                                    <div class="list-img" style="${img ? `background-image:url(${img});background-size:cover;background-position:center;` : 'display:flex;align-items:center;justify-content:center;'}">
+                                        ${!img ? '<span class="material-symbols-outlined" style="font-size:20px;color:var(--text-tertiary)">trending_up</span>' : ''}
+                                    </div>
+                                    <div class="list-content">
+                                        <div class="list-title">${escapeHtml(article.normalizedtitle || article.title)}</div>
+                                        <div class="list-desc">${escapeHtml(article.description || '')}</div>
+                                        <div class="card-meta" style="margin-top:6px">
+                                            <span class="material-symbols-outlined" style="font-size:11px">bar_chart</span>
+                                            ${Number(article.views).toLocaleString()} views
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="list-divider"></div>`;
+                                ${idx < Math.min(5, mostRead.length) - 1 ? '<div class="list-divider"></div>' : ''}`;
                     });
+                    html += `
+                        </div>
+                    </section>`;
                 }
 
                 container.innerHTML = html;
                 staggerAnimate(container);
+                observeReveals(container);
+                bindSurfaceTilt(container);
             });
         }
 
@@ -2457,6 +3524,8 @@
                     els.tbActionIcon.classList.add('icon-filled');
                 } catch (e) { /* storage full */ }
             }
+
+            syncHomeStage();
         }
 
         function loadSaved() {
@@ -2510,6 +3579,11 @@
             document.documentElement.style.setProperty('--font-size-base', appState.fontSize);
             const fs = document.getElementById('font-select');
             if (fs) fs.value = appState.fontSize;
+
+            const themeMeta = document.querySelector('meta[name="theme-color"]');
+            if (themeMeta) themeMeta.setAttribute('content', isDark ? '#0D0C0A' : '#F2ECE1');
+
+            syncHomeStage();
         }
 
         function toggleTheme() {
@@ -2534,6 +3608,7 @@
         function changeLang(val) {
             appState.lang = val;
             localStorage.setItem('wr_lang', val);
+            syncHomeStage();
             loadFeed();
         }
 
